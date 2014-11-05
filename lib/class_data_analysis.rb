@@ -4,53 +4,34 @@ class ClassDataAnalysis
   end
 
   def lowest_temperature
-
-    low_temp = 100
-    @temp_data.each do |temp|
-      low_temp = temp.low if temp.low < low_temp
-    end
-    low_temp
+    @temp_data.map {|temp| temp.low}.min
   end
 
   def highest_temperature
-    high_temp = 0
-    @temp_data.each do |temp|
-      high_temp = temp.high if temp.high > high_temp
-    end
-    high_temp
+    @temp_data.map {|temp| temp.high}.max
   end
 
   def day_of_lowest_temperature
-    low_temp = 100
-    day = 0
-    @temp_data.each do |temp_obj|
-      if low_temp > temp_obj.low
-        day = temp_obj.day
-        low_temp = temp_obj.low
-      end
+    low_day = {}
+    @temp_data.each do |line|
+      low_day[line.low] = line.day
     end
-    day
+
+    keys = low_day.map {|k,v| k}
+    low_day[keys.min]
   end
 
   def day_of_highest_temperature
-    high_temp = 0
-    day = 0
-    @temp_data.each do |temp_obj|
-      if high_temp < temp_obj.high
-        day = temp_obj.day
-        high_temp = temp_obj.high
-      end
+    high_day = {}
+    @temp_data.each do |line|
+      high_day[line.high] = line.day
     end
-    day
+
+    keys = high_day.map {|k,v| k}
+    high_day[keys.max]
   end
 
   def average_temperatures
-    average_temp = []
-    @temp_data.each do |temp_obj|
-      average_temp << (temp_obj.low + temp_obj.high)/2.0
-    end
-    average_temp
+    @temp_data.map {|temp| (temp.high+temp.low)/2.0}
   end
-
-
 end
