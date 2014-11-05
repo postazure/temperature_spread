@@ -7,7 +7,7 @@ describe ClassDataAnalysis do
   let(:analyzer) { ClassDataAnalysis.new(data) }
 
   describe '#lowest_temperature' do
-    it "returns the lowest number of all the nested arrays at the last index" do
+    xit "returns the lowest number of all the nested arrays at the last index" do
       expect(analyzer.lowest_temperature).to be == 32
     end
   end
